@@ -1,0 +1,26 @@
+# Node modules
+frontend/node_modules/
+backend/node_modules/
+
+# Build outputs
+frontend/build/
+backend/dist/
+backend/build/
+
+# Environment variables
+frontend/.env*
+backend/.env*
+
+# Logs
+*.log
+logs/
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# IDEs and OS
+.vscode/
+.idea/
+.DS_Store
+*~
