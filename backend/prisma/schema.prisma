@@ -5,7 +5,58 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../generated/prisma"
 }
 
+datasource db {
+  provider = "mysql"
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  name     String
+  email    String   @unique
+  password String
+  role     String   @default("customer")
+  createAt DateTime @default(now())
+
+  @@map("users")
+}
+
+model Author {
+  id Int @id @default(autoincrement())
+  name String @unique
+  bio String?
+  photo String?
+  books Book[]
+}
+
+model Genre {
+  id Int @id @default(autoincrement())
+  name String @unique
+  books Book[]
+
+  @@map("genres")
+}
+
+model Book{
+  id Int @id @default(autoincrement())
+  title String 
+  slug String @unique
+  description String?
+  price Float @default(0)
+  stock Int @default(0)
+  coverImage String?
+  publishedYear Int?
+  isbn String? @unique
+
+  //Relations
+  author Author @relation(fields: [authorId] , references: [id])
+  authorId Int 
+
+  genres Genre[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
