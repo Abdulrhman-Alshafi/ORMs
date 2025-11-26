@@ -1,2 +1,12 @@
 import { prismaClient } from "@prisma/client";
-import { prismaMysql } from "@prisma/adadapter-mysql";
+import "dotenv/config";
+
+const prisma = new PrismaClient({
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL,
+    },
+  },
+});
+
+export default prisma;
