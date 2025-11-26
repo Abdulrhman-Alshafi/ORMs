@@ -25,38 +25,40 @@ model User {
 }
 
 model Author {
-  id Int @id @default(autoincrement())
-  name String @unique
-  bio String?
+  id    Int     @id @default(autoincrement())
+  name  String  @unique
+  bio   String?
   photo String?
   books Book[]
+  @@map("authors")
 }
 
 model Genre {
-  id Int @id @default(autoincrement())
-  name String @unique
+  id    Int    @id @default(autoincrement())
+  name  String @unique
   books Book[]
 
   @@map("genres")
 }
 
-model Book{
-  id Int @id @default(autoincrement())
-  title String 
-  slug String @unique
-  description String?
-  price Float @default(0)
-  stock Int @default(0)
-  coverImage String?
+model Book {
+  id            Int     @id @default(autoincrement())
+  title         String
+  slug          String  @unique
+  description   String?
+  price         Float   @default(0)
+  stock         Int     @default(0)
+  coverImage    String?
   publishedYear Int?
-  isbn String? @unique
+  isbn          String? @unique
 
   //Relations
-  author Author @relation(fields: [authorId] , references: [id])
-  authorId Int 
+  author   Author @relation(fields: [authorId], references: [id])
+  authorId Int
 
   genres Genre[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  @@map("books")
 }
